@@ -4,7 +4,9 @@
 #define NT 10 /// number of coeffs
 #define NB 13 /// number of bits
 
-const int b[NT]={8, 17, 8}; /// b array
+///const int b[NT]={8, 17, 8}; /// b array
+const int b[NT];///Define b array
+///Read b from file Matlab
 
 /// Perform fixed point filtering assming direct form I
 ///\param x is the new input sample
@@ -36,7 +38,8 @@ int myfilter(int x)
   /// Moving average part
   y = 0;
   for (i=0; i<NT; i++)
-    y += (sx[i]*b[i]) >> (NB-1); //101*010 = 001010 => 0010.10xxx //integer part of fixed point
+    y += (sx[i]*b[i]) >> (NB-1); // y=yq/(2^nb-1)
+    //-1 <= y <= +1
 
   /// update the y shift register
   for (i=NT-2; i>0; i--)
@@ -50,9 +53,18 @@ int main (int argc, char **argv)
 {
   FILE *fp_in;
   FILE *fp_out;
-
+  FILE *fp_b;
   int x;
   int y;
+
+  ///Fill b array
+  int i=0;
+  fp_b = fopen("bcoeff.txt", "r");
+  do{
+    fscanf(fp_in, "%d", &b[i]);
+    i++;
+  } while (!feof(fp_in));
+  fclose(fp_b);
 
   /// check the command line
   if (argc != 3)
