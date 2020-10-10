@@ -4,6 +4,7 @@ use ieee.numeric_std.all;
 
 PACKAGE fir_package is
   
-  generic(
-    nb : signed(7 downto 0);
-    N : std_logic
+  constant nb : integer := 8;
+  constant N : integer := 10;
+
+END PACKAGE;
