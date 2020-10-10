@@ -1,0 +1,24 @@
+LIBRARY ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use WORK.FIR_PACKAGE.ALL;
+
+ENTITY tb_FIR is
+END tb_fir;
+
+ARCHITECTURE test OF tb_FIR is
+
+COMPONENT FIR is
+  PORT(DIN : IN signed(7 downto 0);
+       VIN : IN std_logic;
+       RST_n : IN std_logic;
+       CLK : IN std_logic;
+       nb : IN signed(  
+       DOUT : OUT signed(7 downto 0);
+       VOUT : OUT std_logic);
+ END FIR;
+ 
+ signal wave_CLK;
+ signal wave_RST_n;
+ 
+ --to be completed
