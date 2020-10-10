@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 use WORK.fir_package.all;
 
 ENTITY tb_FIR is
-END tb_fir;
+END tb_FIR;
 
 ARCHITECTURE test OF tb_FIR is
 
