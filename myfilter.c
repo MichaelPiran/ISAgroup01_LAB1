@@ -4,7 +4,7 @@
 #define NT 10 /// number of coeffs
 #define NB 13 /// number of bits
 
-///const int b[NT]={8, 17, 8}; /// b array
+///const int b[NT]={8, 17, 8}; /// standard b array
 const int b[NT];///Define b array
 ///Read b from file Matlab
 
