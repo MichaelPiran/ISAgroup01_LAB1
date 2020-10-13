@@ -5,7 +5,7 @@
 #define NB 13 /// number of bits
 
 ///const int b[NT]={8, 17, 8}; /// b array
-const int b[NT];///Define b array
+const int b[NT];///Definne b array to be read from file
 ///Read b from file Matlab
 
 /// Perform fixed point filtering assming direct form I
