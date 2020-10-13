@@ -47,5 +47,7 @@ fprintf(fp, '%d\n', yq);
 fclose(fp);
 %% Save nb-bit integer coefficients
 fp=fopen('bcoeff.txt', 'w');
-fprintf(fp, '%d\n', bi);
+fprintf(fp, '%d\n', bi);%%store the integer value on Nb bit of b coefficients
 fclose(fp);
+
+thd_value = thd(y) %%evaluation of Total Harmonic Distorsion

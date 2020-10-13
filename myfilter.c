@@ -1,10 +1,12 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #define NT 10 /// number of coeffs
 #define NB 13 /// number of bits
 
-const int b[NT]={8, 17, 8}; /// b array
+///const int b[NT]={8, 17, 8}; /// b array
+const int b[NT];///Define b array
+///Read b from file Matlab
 
 /// Perform fixed point filtering assming direct form I
 ///\param x is the new input sample
@@ -36,7 +38,8 @@ int myfilter(int x)
   /// Moving average part
   y = 0;
   for (i=0; i<NT; i++)
-    y += (sx[i]*b[i]) >> (NB-1); //101*010 = 001010 => 0010.10xxx //integer part of fixed point
+    y += (sx[i]*b[i]) >> (NB-1); // y=yq/(2^nb-1)
+    //-1 <= y <= +1
 
   /// update the y shift register
   for (i=NT-2; i>0; i--)
@@ -46,11 +49,11 @@ int myfilter(int x)
   return y;
 }
 
-int main (int argc, char **argv)
+int main (int argc, char *argv[])
 {
   FILE *fp_in;
   FILE *fp_out;
-
+  FILE *fp_b;
   int x;
   int y;
 
@@ -60,6 +63,19 @@ int main (int argc, char **argv)
     printf("Use: %s <input_file> <output_file>\n", argv[0]);
     exit(1);
   }
+// Fill b array
+  int i=0;
+  fp_b = fopen("/home/isa01/Desktop/bcoeff.txt", "r"); 
+  if (fp_b == NULL) {
+    printf("Error open bcoeff.txt\n");
+    exit(3);
+  }
+  while (!feof(fp_b)){
+    fscanf(fp_b, "%d",&b[i]);
+    printf("%d\n", b[i]);
+    i++;
+  }
+  fclose(fp_b);  
 
   /// open files
   fp_in = fopen(argv[1], "r");
@@ -68,8 +84,8 @@ int main (int argc, char **argv)
     printf("Error: cannot open %s\n");
     exit(2);
   }
-  fp_out = fopen(argv[2], "w");
 
+  fp_out = fopen(argv[2], "w");
   /// get samples and apply filter
   fscanf(fp_in, "%d", &x);
   do{
