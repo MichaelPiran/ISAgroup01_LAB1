@@ -19,14 +19,22 @@ COMPONENT FIR is
        VOUT : OUT std_logic);
  END FIR;
  
- signal wave_CLK : std_logic;
- signal wave_RST_n : std_logic;
- signal wave_DIN : signed(nb-1 downto 0);
+ signal sig_CLK : std_logic;
+ signal sig_RST_n : std_logic;
+ signal sig_DIN : signed(nb-1 downto 0);
  signal wave_VIN : std_logic;
  
  BEGIN
  
---to be completed 
+tb_clock: process(sig_CLK)
+  begin
+    sig_CLK <= not(sig_CLK) after 50ns; --look here;
+end process;
+    
+test : process
+  begin
+    
+    
 
 test_FIR : FIR PORT MAP
   (DIN => wave_DIN, VIN => wave_VIN, RST_n => wave_RST_n, CLK => wave_CLK);
