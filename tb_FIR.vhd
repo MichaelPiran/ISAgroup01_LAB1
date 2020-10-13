@@ -33,7 +33,7 @@ COMPONENT FIR is
 tb_clock: process(sig_CLK) --process that simulates a clock
   begin
     sig_CLK <= not(sig_CLK) after 40ns; --look here;
-end process tb_clock;
+end process;
     
 TB_proc : process(sig_CLK) 
  
@@ -71,7 +71,7 @@ TB_proc : process(sig_CLK)
   end if;
 
  end if;
-end process TB_proc;
+end process;
     
 
 test_FIR : FIR PORT MAP
