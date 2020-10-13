@@ -17,7 +17,7 @@ COMPONENT FIR is
        CLK : IN std_logic;
        DOUT : OUT signed(nb-1 downto 0);
        VOUT : OUT std_logic);
- END FIR;
+ END COMPONENT;
  
  signal wave_CLK : std_logic;
  signal wave_RST_n : std_logic;
