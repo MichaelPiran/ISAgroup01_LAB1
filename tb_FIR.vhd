@@ -19,7 +19,7 @@ COMPONENT FIR is
        VOUT : OUT std_logic);
  END FIR;
   
- type bit_mat is array (N-1 downto 0) of signed(nb-1 downto 0);
+ type X_array is array (N-1 downto 0) of signed(nb-1 downto 0);
  
  signal sig_CLK : std_logic;
  signal sig_RST_n : std_logic;
@@ -29,6 +29,8 @@ COMPONENT FIR is
  file file_res : text;
  
  BEGIN
+   
+X_array <= LUT_to_samples; 
  
 tb_clock: process(sig_CLK) --process that simulates a clock
   begin
@@ -54,7 +56,7 @@ TB_proc : process(sig_CLK)
     --readline(file_res, v_LINE);
     --read(v_LINE, v_X);
 
-    sig_DIN <= X_array; --at every clock cycle give to the input a new value (x[n]) (X_array from FIR_package)
+    sig_DIN <= X_array; --at every clock cycle give to the input a new value (x[n]) (X_array from FIR_package
   
  -- end loop;
 
