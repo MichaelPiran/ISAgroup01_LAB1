@@ -14,28 +14,34 @@ entity FIR is
 end FIR; 
 
 component REG is
-	Port (REG_IN:	In	std_logic;
+	Port (REG_IN:	In	std_logic_vector(nb-1 downto 0);
 			REG_CLK:		In	std_logic;
 			REG_RESET:	In	std_logic;
-			REG_OUT: Out std_logic);
+			REG_OUT: Out std_logic_vector(nb-1 downto 0));
 end component;
 
 architecture BEHAVIOR of FIR is
-type sig_vector is array (10 downto 0) of std_logic_vector(12 downto 0);
-signal var: sig_vector:= (others =>'0')(others =>'0');
+type sig_vector is array (N downto 0) of std_logic_vector(nb-1 downto 0);
+signal op_mult : sig_vector:= (others =>'0')(others =>'0');  /*Operand of multiplication*/
+signal res_mult : sig_vector:= (others =>'0')(others =>'0'); /*Result of multiplication*/
+signal res_sum is array (N-1 downto 0) of std_logic_vector(nb-1 downto 0):= (others =>'0')(others =>'0');/*Result of addition*/
+
 begin
-  FF_loop: for i in 0 to 9 generate 
-    FF_i : REG port map(REG_IN => , REG_CLK => CLK, REG_RESET => RST_n, REG_OUT => );
+  
+  FF_loop: for i in 0 to N-1 generate /*10 registers that shift the input sample at each clock cycle*/
+    FF_i : REG port map(REG_IN => op_mult[i], REG_CLK => CLK, REG_RESET => RST_n, REG_OUT => op_mult[i+1]);
   end generate;
-	 
+	
   process(CLK)
   begin 
-    s0 = x *a0;
-    for 1 to 10
-      
-      mulres[i] =out*a;
+    op_mult[0] <= DIN;/*New sample is store*/
+    
+	 s0 = x *a0;
+    for i in 0 to N loop
+      res_mult[i] <= ;
 	   si = s0+mulres[i];
-	 end for;
+	 end loop;
+	 
   end process;
 end architecture;
 
