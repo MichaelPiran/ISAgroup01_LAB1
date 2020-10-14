@@ -22,11 +22,15 @@ end component;
 
 architecture BEHAVIOR of FIR is
   
-type sig_vector is array (N downto 0) of std_logic_vector(nb-1 downto 0);
+type sig_vector is array (N-1 downto 0) of std_logic_vector(nb-1 downto 0);
 signal op_mult : sig_vector:= (others =>'0')(others =>'0');  --Operand of multiplication
 signal res_mult : sig_vector:= (others =>'0')(others =>'0'); --Result of multiplication
 
+signal b_coeff : sig_vector:= (others =>'0')(others =>'0');
+
 begin
+
+b_coeff <= LUT_to_bcoeff;
   
   FF_loop: for i in 0 to N-1 generate --10 registers that shift the input sample at each clock cycle
     FF_i : REG port map(REG_IN => op_mult[i], REG_CLK => CLK, REG_RESET => RST_n, REG_OUT => op_mult[i+1]);
