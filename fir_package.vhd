@@ -10,6 +10,9 @@ PACKAGE fir_package is
   constant N : integer := 10;
   constant samples_num : integer := 200
     
+  type array_type1 is array (samples_num-1 downto 0) of signed(nb-1 downto 0);
+  type array_type2 is array (N-1 donwto 0) of std_logic_vector(nb-1 downto 0);
+    
 PACKAGE BODY fir_package is
 
   PROCEDURE LUT_to_samples is
@@ -19,7 +22,7 @@ PACKAGE BODY fir_package is
     variable v_line : line; --file object
     variable val : signed(nb-1 downto 0); --temporary variable useful to store x values while building data matrixes
 
-    type X_array is array (samples_num-1 downto 0) of signed(nb-1 downto 0);
+    signal X_array : array_type1 := (others<=0)(others<=0);
 
   begin
 
@@ -53,7 +56,7 @@ PACKAGE BODY fir_package is
     variable v_line : line; --file object
     variable val : signed(nb-1 downto 0); --temporary variable useful to store b_coeff values while building data matrixes
 
-    type b_coeff is array (N-1 donwto 0) of std_logic_vector(nb-1 downto 0);
+    signal b_coeff : array_type2 := (others <=0)(others <=0);
 
   begin
    --read all lines in the file and write the values in bcoeff array
