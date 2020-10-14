@@ -41,7 +41,7 @@ begin
     op_mult(0) <= DIN;--New sample is store
     
     for i in 0 to N loop
-      res_mult(i) <= op_mult(0) * b_coeff(0) ;--b_coefficients defined
+      res_mult(i) <= op_mult(i) * b_coeff(i) ;--b_coefficients defined
                                               --in the  package
       sum <= sum + res_mult(i);     
     end loop;
