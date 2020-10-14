@@ -37,9 +37,9 @@ end process;
     
 TB_proc : process(sig_CLK) 
  
-  variable v_LINE : line; --file object
-  variable v_X : signed(nb-1 downto 0); --variable X
-  variable clk_count : integer := 0;
+  --variable v_LINE : line; --file object
+  --variable v_X : signed(nb-1 downto 0); --variable X
+  --variable clk_count : integer := 0;
   
   begin
   
@@ -47,31 +47,32 @@ TB_proc : process(sig_CLK)
     
    clk_count := clk_count + 1;
     
-   file_open(file_res, "filename.txt", read_mode); --read file (GIVE THE FILE A NAME)
+   --file_open(file_res, "filename.txt", read_mode); --read file (GIVE THE FILE A NAME)
   
  --read all lines in the files and write the values in sig_DIN
-  while not endfile(file_res) loop --THIS READS EVERY CLOCK CYCLE?
-    readline(file_res, v_LINE);
-    read(v_LINE, v_X);
+  --while not endfile(file_res) loop --THIS READS EVERY CLOCK CYCLE?
+    --readline(file_res, v_LINE);
+    --read(v_LINE, v_X);
 
-    sig_DIN <= v_X;
+    sig_DIN <= X_array; --at every clock cycle give to the input a new value (x[n]) (X_array from FIR_package)
   
-  end loop;
+ -- end loop;
 
-  if(clk_count < 3) then --VIN=0 until 3 clk cycle
+  if(clk_count < 2) then --VIN=0 until 3 clk cycle
     VIN <= '0';
   else 
     VIN <= '1';
   end if;
     
-  if(clk_count == 20) then --RST_n=1 @ 20th clk cycle
+  if(clk_count == 19) then --RST_n=1 @ 20th clk cycle
     RST_n <= '1';
   else
     RST_n <= '0':
   end if;
 
  end if;
-end process;
+end process; 
+--NOTE: signals will be updated only at the end of the process and the new value will be visible only in the next clock cycle
     
 
 test_FIR : FIR PORT MAP
