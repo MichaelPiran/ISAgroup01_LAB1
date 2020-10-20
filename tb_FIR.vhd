@@ -56,7 +56,7 @@ TB_proc : process(sig_CLK)
     --readline(file_res, v_LINE);
     --read(v_LINE, v_X);
 
-    sig_DIN <= X_array; --at every clock cycle give to the input a new value (x[n]) (X_array from FIR_package
+    sig_DIN <= X_array(clk_count); --at every clock cycle give to the input a new value (x[n]) (X_array from FIR_package
   
  -- end loop;
 
