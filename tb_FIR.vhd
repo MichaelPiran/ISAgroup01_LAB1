@@ -21,10 +21,10 @@ COMPONENT FIR is
   
  type X_array is array (N-1 downto 0) of signed(nb-1 downto 0);
  
- signal sig_CLK : std_logic;
- signal sig_RST_n : std_logic;
+ signal sig_CLK : std_logic := 0;
+ signal sig_RST_n : std_logic := 0;
  signal sig_DIN : signed(nb-1 downto 0);
- signal wave_VIN : std_logic;
+ signal wave_VIN : std_logic := 1;
 
  file file_res : text;
  
