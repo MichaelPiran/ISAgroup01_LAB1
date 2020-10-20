@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;
 use ieee.std_logic_unsigned.all;
 use ieee.std_logic_textio.all;
-
+use WORK.fir_package.all;
 library std;
 use std.textio.all;
 
@@ -12,11 +12,18 @@ entity data_maker is
     CLK     : in  std_logic;
     RST_n   : in  std_logic;
     VOUT    : out std_logic;
-    DOUT    : out std_logic_vector(15 downto 0);
-    H0      : out std_logic_vector(15 downto 0);
-    H1      : out std_logic_vector(15 downto 0);
-    H2      : out std_logic_vector(15 downto 0);
-    H3      : out std_logic_vector(15 downto 0);
+    DOUT    : out signed(nb-1 downto 0);
+    H0      : out signed(nb-1 downto 0);
+	 H1      : out signed(nb-1 downto 0);
+	 H2      : out signed(nb-1 downto 0);
+	 H3      : out signed(nb-1 downto 0);
+	 H4      : out signed(nb-1 downto 0);
+	 H5      : out signed(nb-1 downto 0);
+	 H6      : out signed(nb-1 downto 0);
+	 H7      : out signed(nb-1 downto 0);
+	 H8      : out signed(nb-1 downto 0);
+	 H9      : out signed(nb-1 downto 0);
+	 H10     : out signed(nb-1 downto 0);
     END_SIM : out std_logic);
 end data_maker;
 
