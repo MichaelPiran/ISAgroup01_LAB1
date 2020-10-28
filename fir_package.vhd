@@ -6,9 +6,12 @@ use ieee.std_logic_textio.all;
 
 PACKAGE fir_package is
   
-  constant nb : integer := 8;
+  constant nb : integer := 13; --Original number of bits
+  constant nb_opt : integer := 8; --Optimize number of bits
   constant N : integer := 10;
-  constant samples_num : integer := 200;
+  
+  
+  --constant samples_num : integer := 200;
     
 --  type array_type1 is array (samples_num-1 downto 0) of signed(nb-1 downto 0);
 --  type array_type2 is array (N-1 donwto 0) of std_logic_vector(nb-1 downto 0);

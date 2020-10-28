@@ -51,3 +51,9 @@ fprintf(fp, '%d\n', bi);%%store the integer value on Nb bit of b coefficients
 fclose(fp);
 
 thd_value = thd(y) %%evaluation of Total Harmonic Distorsion
+
+%% Check the VHDL output
+fp=fopen('results_vhd.txt', 'r');
+vhd_q = fscanf(fp, '%d');
+fclose(fp);
+vhd_i=vhd_q/2^(nb-1);

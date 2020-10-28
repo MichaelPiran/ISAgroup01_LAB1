@@ -37,20 +37,20 @@ architecture beh of data_maker is
 begin  -- beh
 
   -- H = b coeff
-  H0 <= conv_signed(-1,8);
-  H1 <= conv_signed(-52,8);
-  H2 <= conv_signed(-102,8);
-  H3 <= conv_signed(260,8);
-  H4 <= conv_signed(1125,8);
-  H5 <= conv_signed(1630,8);
-  H6 <= conv_signed(1125,8);
-  H7 <= conv_signed(260,8);
-  H8 <= conv_signed(-102,8);
-  H9 <= conv_signed(-52,8);
-  H10 <= conv_signed(-1,8);
+  H0 <= conv_signed(-1,nb);
+  H1 <= conv_signed(-52,nb);
+  H2 <= conv_signed(-102,nb);
+  H3 <= conv_signed(260,nb);
+  H4 <= conv_signed(1125,nb);
+  H5 <= conv_signed(1630,nb);
+  H6 <= conv_signed(1125,nb);
+  H7 <= conv_signed(260,nb);
+  H8 <= conv_signed(-102,nb);
+  H9 <= conv_signed(-52,nb);
+  H10 <= conv_signed(-1,nb);
 
   process (CLK, RST_n)
-    file fp_in : text open READ_MODE is "./samples.txt";
+    file fp_in : text open READ_MODE is "../src/samples.txt";
     variable line_in : line;
     variable x : integer;
   begin  -- process
@@ -62,7 +62,7 @@ begin  -- beh
       if not endfile(fp_in) then
         readline(fp_in, line_in);
         read(line_in, x);
-        DOUT <= conv_signed(x, 8) after tco;
+        DOUT <= conv_signed(x, nb) after tco;
         VOUT <= '1' after tco;
         sEndSim <= '0' after tco;
       else

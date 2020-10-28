@@ -28,7 +28,3 @@ grid on;
 xlabel('Normalized frequency');
 ylabel('dB');
 
-
-
-
-
