@@ -1,0 +1,8 @@
+vcom -93 -work ./work ../src/fir_package.vhd
+vcom -93 -work ./work ../src/clk_gen.vhd
+vcom -93 -work ./work ../src/data_maker_new.vhd
+vcom -93 -work ./work ../src/data_sink_place_route.vhd
+
+vlog -work ./work ../innovus/FIR.v
+vlog -work ./work ../src/tb_fir.v
+vsim -L /software/dk/nangate45/verilog/msim6.2g work.tb_fir

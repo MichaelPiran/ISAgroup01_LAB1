@@ -1,0 +1,122 @@
+LIBRARY ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use WORK.fir_package.all;
+
+library std;
+use std.textio.all;
+
+entity mult_add is
+  PORT(M0 : in signed (nb_opt-1 downto 0);
+       M1 : in signed (nb_opt-1 downto 0);
+		 M2 : in signed (nb_opt-1 downto 0);
+		 M3 : in signed (nb_opt-1 downto 0);
+		 M4 : in signed (nb_opt-1 downto 0);
+		 M5 : in signed (nb_opt-1 downto 0);
+		 M6 : in signed (nb_opt-1 downto 0);
+		 M7 : in signed (nb_opt-1 downto 0);
+		 M8 : in signed (nb_opt-1 downto 0);
+		 M9 : in signed (nb_opt-1 downto 0);
+		 M10 :in signed (nb_opt-1 downto 0);
+		 
+		 H0 : in signed (nb_opt-1 downto 0);
+		 H1 : in signed (nb_opt-1 downto 0);
+		 H2 : in signed (nb_opt-1 downto 0);
+		 H3 : in signed (nb_opt-1 downto 0);
+		 H4 : in signed (nb_opt-1 downto 0);
+		 H5 : in signed (nb_opt-1 downto 0);
+		 H6 : in signed (nb_opt-1 downto 0);
+		 H7 : in signed (nb_opt-1 downto 0);
+		 H8 : in signed (nb_opt-1 downto 0);
+		 H9 : in signed (nb_opt-1 downto 0);
+		 H10: in signed (nb_opt-1 downto 0);
+       
+		 VIN_ma : IN std_logic;
+         RST_n_ma : IN std_logic;
+         CLK_ma : IN std_logic;
+         YOUT  : OUT signed(2*nb_opt-1 downto 0));
+end mult_add; 
+
+architecture BEHAVIOR of mult_add is
+
+component REG16 is
+	Port (REG_IN    :	In	signed(2*nb_opt-1 downto 0);
+	      REG_EN    :	In	std_logic;
+	      REG_CLK   :	In	std_logic;
+         REG_RESET :	In	std_logic;
+         REG_OUT   : Out signed(2*nb_opt-1 downto 0));
+end component;
+  
+type sig_vector is array (N downto 0) of signed(2*nb_opt-1 downto 0);
+signal res_mult  : sig_vector := (others =>(others =>'0'));  --Operand of multiplication
+signal op_s   : sig_vector := (others =>(others =>'0')); --Sum operand
+signal op_s1   : sig_vector := (others =>(others =>'0')); --Sum operand after reg
+signal sum   : sig_vector := (others =>(others =>'0')); --Sum result
+
+begin
+  res_mult(0)<= SHIFT_RIGHT(H0*M0, (nb_opt-1));
+  res_mult(1)<= SHIFT_RIGHT(H1*M1, (nb_opt-1));
+  res_mult(2)<= SHIFT_RIGHT(H2*M2, (nb_opt-1));
+  res_mult(3)<= SHIFT_RIGHT(H3*M3, (nb_opt-1));
+  res_mult(4)<= SHIFT_RIGHT(H4*M4, (nb_opt-1));
+  res_mult(5)<= SHIFT_RIGHT(H5*M5, (nb_opt-1));
+  res_mult(6)<= SHIFT_RIGHT(H6*M6, (nb_opt-1));
+  res_mult(7)<= SHIFT_RIGHT(H7*M7, (nb_opt-1));
+  res_mult(8)<= SHIFT_RIGHT(H8*M8, (nb_opt-1));
+  res_mult(9)<= SHIFT_RIGHT(H9*M9, (nb_opt-1));
+  res_mult(10)<= SHIFT_RIGHT(H10*M10, (nb_opt-1));
+  --sum(0) <= res_mult(0)+ res_mult(1);   
+  --sum(1) <= sum(0) + res_mult(2);   
+  --sum(2) <= sum(1) + res_mult(3);
+--  sum(3) <= sum(2) + res_mult(4);
+--  sum(4) <= sum(3) + res_mult(5);
+--  sum(5) <= sum(4) + res_mult(6);
+-- sum(6) <= sum(5) + res_mult(7);
+--  sum(7) <= sum(6) + res_mult(8);
+--  sum(8) <= sum(7) + res_mult(9);
+--  sum(9) <= sum(8) + res_mult(10);
+--  YOUT <= sum(9);
+
+--------------------------------------------------------------
+  ffm_0 : REG16 port map(REG_IN => res_mult(0), REG_EN => VIN_ma, REG_CLK => CLK_ma, REG_RESET => RST_n_ma, REG_OUT => op_s(0));
+  ffm_1 : REG16 port map(REG_IN => res_mult(1), REG_EN => VIN_ma, REG_CLK => CLK_ma, REG_RESET => RST_n_ma, REG_OUT => op_s(1));
+  ffm_2 : REG16 port map(REG_IN => res_mult(2), REG_EN => VIN_ma, REG_CLK => CLK_ma, REG_RESET => RST_n_ma, REG_OUT => op_s(2));
+  ffm_3 : REG16 port map(REG_IN => res_mult(3), REG_EN => VIN_ma, REG_CLK => CLK_ma, REG_RESET => RST_n_ma, REG_OUT => op_s(3));
+  ffm_4 : REG16 port map(REG_IN => res_mult(4), REG_EN => VIN_ma, REG_CLK => CLK_ma, REG_RESET => RST_n_ma, REG_OUT => op_s(4));
+  ffm_5 : REG16 port map(REG_IN => res_mult(5), REG_EN => VIN_ma, REG_CLK => CLK_ma, REG_RESET => RST_n_ma, REG_OUT => op_s(5));
+  ffm_6 : REG16 port map(REG_IN => res_mult(6), REG_EN => VIN_ma, REG_CLK => CLK_ma, REG_RESET => RST_n_ma, REG_OUT => op_s(6));
+  ffm_7 : REG16 port map(REG_IN => res_mult(7), REG_EN => VIN_ma, REG_CLK => CLK_ma, REG_RESET => RST_n_ma, REG_OUT => op_s(7));
+  ffm_8 : REG16 port map(REG_IN => res_mult(8), REG_EN => VIN_ma, REG_CLK => CLK_ma, REG_RESET => RST_n_ma, REG_OUT => op_s(8));
+  ffm_9 : REG16 port map(REG_IN => res_mult(9), REG_EN => VIN_ma, REG_CLK => CLK_ma, REG_RESET => RST_n_ma, REG_OUT => op_s(9));
+  ffm_10: REG16 port map(REG_IN =>res_mult(10), REG_EN => VIN_ma, REG_CLK => CLK_ma, REG_RESET => RST_n_ma, REG_OUT =>op_s(10));
+  
+  sum(0) <= op_s(0) + op_s(1); 
+  ffs_0 : REG16 port map(REG_IN => sum(0), REG_EN => VIN_ma, REG_CLK => CLK_ma, REG_RESET => RST_n_ma, REG_OUT => op_s1(0));
+  
+  sum(1) <= op_s1(0) + op_s(2); 
+  ffs_1 : REG16 port map(REG_IN => sum(1), REG_EN => VIN_ma, REG_CLK => CLK_ma, REG_RESET => RST_n_ma, REG_OUT => op_s1(1));
+  
+  sum(2) <= op_s1(1) + op_s(3); 
+  ffs_2 : REG16 port map(REG_IN => sum(2), REG_EN => VIN_ma, REG_CLK => CLK_ma, REG_RESET => RST_n_ma, REG_OUT => op_s1(2));
+  
+  sum(3) <= op_s1(2) + op_s(4); 
+  ffs_3 : REG16 port map(REG_IN => sum(3), REG_EN => VIN_ma, REG_CLK => CLK_ma, REG_RESET => RST_n_ma, REG_OUT => op_s1(3));
+  
+  sum(4) <= op_s1(3) + op_s(5); 
+  ffs_4 : REG16 port map(REG_IN => sum(4), REG_EN => VIN_ma, REG_CLK => CLK_ma, REG_RESET => RST_n_ma, REG_OUT => op_s1(4));
+  
+  sum(5) <= op_s1(4) + op_s(6); 
+  ffs_5 : REG16 port map(REG_IN => sum(5), REG_EN => VIN_ma, REG_CLK => CLK_ma, REG_RESET => RST_n_ma, REG_OUT => op_s1(5));
+  
+  sum(6) <= op_s1(5) + op_s(7);
+  ffs_6 : REG16 port map(REG_IN => sum(6), REG_EN => VIN_ma, REG_CLK => CLK_ma, REG_RESET => RST_n_ma, REG_OUT => op_s1(6));
+  
+  sum(7) <= op_s1(6) + op_s(8); 
+  ffs_7 : REG16 port map(REG_IN => sum(7), REG_EN => VIN_ma, REG_CLK => CLK_ma, REG_RESET => RST_n_ma, REG_OUT => op_s1(7));
+  
+  sum(8) <= op_s1(7) + op_s(9); 
+  ffs_8 : REG16 port map(REG_IN => sum(8), REG_EN => VIN_ma, REG_CLK => CLK_ma, REG_RESET => RST_n_ma, REG_OUT => op_s1(8));
+  
+  sum(9) <= op_s1(8) + op_s(10);
+  YOUT <= sum(9);
+end architecture;

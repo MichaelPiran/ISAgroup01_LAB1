@@ -1,0 +1,33 @@
+Loading db file '/software/synopsys/syn_current_64.18/libraries/syn/gtech.db'
+Loading db file '/software/synopsys/syn_current_64.18/libraries/syn/standard.sldb'
+  Loading link library 'NangateOpenCellLibrary'
+  Loading link library 'gtech'
+Running PRESTO HDLC
+Warning:  ../src/behavioral_filter.vhd:41: The initial value for signal 'op_mult' is not supported for synthesis. Presto ignores it.  (ELAB-130)
+Warning:  ../src/behavioral_filter.vhd:42: The initial value for signal 'b_vect' is not supported for synthesis. Presto ignores it.  (ELAB-130)
+Warning:  ../src/behavioral_filter.vhd:63: Initial values for signals/variables are not supported for synthesis by default. They are ignored. (VHD-7)
+Warning:  ../src/behavioral_filter.vhd:63: Initial values for signals/variables are not supported for synthesis by default. They are ignored. (VHD-7)
+
+Inferred memory devices in process
+	in routine FIR line 63 in file
+		'../src/behavioral_filter.vhd'.
+===========================================================================
+|    Register Name    | Type  | Width | Bus | MB | AR | AS | SR | SS | ST |
+===========================================================================
+|       sum_reg       | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+===========================================================================
+Presto compilation completed successfully.
+Elaborated 1 design.
+Current design is now 'FIR'.
+Information: Building the design 'REG'. (HDL-193)
+
+Inferred memory devices in process
+	in routine REG line 15 in file
+		'../src/reg.vhd'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|     REG_OUT_reg     | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+1

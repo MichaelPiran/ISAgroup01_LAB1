@@ -1,0 +1,46 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : FIR
+Version: O-2018.06-SP4
+Date   : Tue Nov  3 09:23:54 2020
+****************************************
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: top
+
+  Startpoint: VIN (input port clocked by MY_CLK)
+  Endpoint: VOUT (output port clocked by MY_CLK)
+  Path Group: MY_CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  FIR                5K_hvratio_1_1        NangateOpenCellLibrary
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock MY_CLK (rise edge)                 0.00       0.00
+  clock network delay (ideal)              0.00       0.00
+  input external delay                     0.50       0.50 r
+  VIN (in)                                 0.00       0.50 r
+  VOUT (out)                               0.05       0.55 r
+  data arrival time                                   0.55
+
+  clock MY_CLK (rise edge)                 1.12       1.12
+  clock network delay (ideal)              0.00       1.12
+  clock uncertainty                       -0.07       1.05
+  output external delay                   -0.50       0.55
+  data required time                                  0.55
+  -----------------------------------------------------------
+  data required time                                  0.55
+  data arrival time                                  -0.55
+  -----------------------------------------------------------
+  slack (MET)                                         0.00
+
+
+1

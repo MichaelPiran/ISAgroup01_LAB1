@@ -1,0 +1,8 @@
+vcom -93 -work ./work ../src/fir_package.vhd
+vcom -93 -work ./work ../src/clk_gen.vhd
+vcom -93 -work ./work ../src/data_maker_new.vhd
+vcom -93 -work ./work ../src/data_sink.vhd
+
+vlog -work ./work ../innovus/FIR.v
+vlog -work ./work ../src/tb_fir.v
+vsim work.tb_fir
